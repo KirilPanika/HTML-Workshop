@@ -20,7 +20,7 @@
 
     <div>
         <h1>GET</h1>
-        <form id="getForm">
+        <form id="getForm" action="https://httpbin.org/get" method="get">
             <input type="submit" value="Try">
         </form>
     </div>
@@ -28,26 +28,26 @@
 
     <div>
         <h1>POST</h1>
-        <form id="postForm">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-
-            <label for="mail">Mail:</label>
-            <input type="mail" id="mail" name="mail">
-
-            <label for="city">City:</label>
-            <input type="city" id="city" name="city">
-
+        <form id="postForm" action="https://jsonplaceholder.typicode.com/posts" method="post">
+            <label for="nickname">Nickname:</label>
+            <input type="text" id="nickname" name="nickname">
+                <br>
+            <label for="pass">Pass:</label>
+            <input type="pass" id="pass" name="pass">
+                <br>
+            <label for="Email">Email:</label>
+            <input type="text" id="Email" name="Email">
+                <br>    
+            <label for="town">Town:</label>
+            <input type="text" id="town" name="town">
+                <br>
             <input type="submit" value="Login">
         </form>
     </div>
     <hr>
     <div>
         <h1>Video</h1>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/020g-0hhCAU" frameborder="0"
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/cu-nDPZ52vY" frameborder="0"
             allowfullscreen></iframe>
     </div>
 
@@ -55,10 +55,13 @@
 
     <div>
         <h1>Map geo</h1>
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1662873.2451231668!2d139.7698121!3d35.50924045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x605d1b87f02e57e7%3A0x2e01618b22571b89!2z0KLQvtC60LjQviwg0K_Qv9C-0L3QuNGP!5e0!3m2!1sru!2slv!4v1695455720560!5m2!1sru!2slv"
-            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d17421.936977535308!2d24.192788843872073!3d56.91894863747159!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46eed1feca80004d%3A0x6d191f8b49e27929!2sAKROPOLE%20R%C4%ABga!5e0!3m2!1sen!2slv!4v1695486105234!5m2!1sen!2slv" 
+        width="600" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <hr>
     <div>
@@ -107,35 +110,6 @@
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
         }
-
-
-        document.getElementById('getForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            fetch(`https://httpbin.org/get`)
-                .then(response => response.text())
-                .then(data => {
-                    console.log('GET Response:', data);
-                })
-                .catch(error => {
-                    console.error('GET Error:', error);
-                });
-        });
-
-        document.getElementById('postForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            fetch('https://jsonplaceholder.typicode.com/posts', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('POST Response:', data);
-                })
-                .catch(error => {
-                    console.error('POST Error:', error);
-                });
-        });
 
     </script>
 </body>
