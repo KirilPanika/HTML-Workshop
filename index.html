@@ -1,73 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Workshop Notebook</title>
+    <title>Class workshop by Stanislavs</title>
 </head>
-<body>
-    <h1>Welcome to My HTML Workshop Notebook</h1>
-    <p>This is a blank HTML page for your workshop notes.</p>
-    <!-- Form 1 -->
-<form>
-    <label for="fname">First name:</label><br>
-    <input type="text" id="fname" name="fname"><br>
-    <label for="lname">Last name:</label><br>
-    <input type="text" id="lname" name="lname">
-</form>
 
-<!-- Form 2 -->
-<form>
-    <input type="radio" id="html" name="fav_language" value="HTML">
-    <label for="html">HTML</label><br>
-    <input type="radio" id="css" name="fav_language" value="CSS">
-    <label for="css">CSS</label><br>
-    <input type="radio" id="javascript" name="fav_language" value="JavaScript">
-    <label for="javascript">JavaScript</label>
-</form>
-
-<!-- Form 3 -->
-<form>
-    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-    <label for="vehicle1"> I have a bike</label><br>
-    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-    <label for="vehicle2"> I have a car</label><br>
-    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-    <label for="vehicle3"> I have a boat</label>
-</form>
-
-<!-- Form 4 -->
-<form action="/action_page.php">
-    <label for="fname">First name:</label><br>
-    <input type="text" id="fname" name="fname" value="John"><br>
-    <label for="lname">Last name:</label><br>
-    <input type="text" id="lname" name="lname" value="Doe"><br><br>
-    <input type="submit" value="Submit">
-</form>
-
-<!-- Form 5 -->
-<form action="/action_page.php">
-    <label for="fname">First name:</label><br>
-    <input type="text" id="fname" value="John"><br><br>
-    <input type="submit" value="Submit">
-</form>
-
-<!-- Form 6 -->
-<form action="/action_page.php">
-    <label for="fname">First name:</label><br>
-    <input type="text" id="fname" name="fname" value="John"><br>
-    <label for="lname">Last name:</label><br>
-    <input type="text" id="lname" name="lname" value="Doe"><br><br>
-    <input type="submit" value="Submit">
-</form>
-
-</body>
-</html><style>
-    / Add your CSS styles here /
-    form {
-        margin-bottom: 20px;
-    }
-    label {
-        font-weight: bold;
+<style>
+    #div1 {
+        width: 350px;
+        height: 70px;
+        padding: 10px;
+        border: 1px solid #aaaaaa;
     }
 </style>
+
+<body>
+
+    <div>
+        <h1>GET</h1>
+        <form id="getForm">
+            <input type="submit" value="Try">
+        </form>
+    </div>
+    <hr>
+
+    <div>
+        <h1>POST</h1>
+        <form id="postForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+            <label for="mail">Mail:</label>
+            <input type="mail" id="mail" name="mail">
+
+            <label for="city">City:</label>
+            <input type="city" id="city" name="city">
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <hr>
+    <div>
+        <h1>Video</h1>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/020g-0hhCAU" frameborder="0"
+            allowfullscreen></iframe>
+    </div>
+
+    <hr>
+
+    <div>
+        <h1>Map geo</h1>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1662873.2451231668!2d139.7698121!3d35.50924045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x605d1b87f02e57e7%3A0x2e01618b22571b89!2z0KLQvtC60LjQviwg0K_Qv9C-0L3QuNGP!5e0!3m2!1sru!2slv!4v1695455720560!5m2!1sru!2slv"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <hr>
+    <div>
+        <h1>Geo self</h1>
+        <button onclick="getLocation()">Try It</button>
+        <p id="geo"></p>
+    </div>
+    <hr>
+    <div>
+        <p>Drag</p>
+
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <br>
+        <img id="drag1"
+            src="https://media.cntraveler.com/photos/63482b255e7943ad4006df0b/16:9/w_1920,c_limit/tokyoGettyImages-1031467664.jpeg"
+            draggable="true" ondragstart="drag(event)" width="336" height="69">
+    </div>
+
+    <script>
+
+        var x = document.getElementById("geo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+
+
+        document.getElementById('getForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            fetch(`https://httpbin.org/get`)
+                .then(response => response.text())
+                .then(data => {
+                    console.log('GET Response:', data);
+                })
+                .catch(error => {
+                    console.error('GET Error:', error);
+                });
+        });
+
+        document.getElementById('postForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('POST Response:', data);
+                })
+                .catch(error => {
+                    console.error('POST Error:', error);
+                });
+        });
+
+    </script>
+</body>
+
+</html>
